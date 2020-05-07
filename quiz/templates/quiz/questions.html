@@ -1,0 +1,18 @@
+{% extends base.html %}
+{% block content %}
+    <form action = {% url submit_quiz %} method="post">
+    {% for question in questions %}
+        <ol>
+        <input type="hidden" name= "question_id", value = {{question.id}}>
+        <input type="hidden" name= "user_id", value = {{user.id}}>
+            {{ question.question }}
+            {{%for option in question.option: %}}
+                {{ counter = 1}}
+                <input type="radio" name = "option" + str(counter)> {{ option }}
+                {{ counter+= 1 }}
+            {% endfor %}
+        </ol>
+        <input type="submit" name="submit">
+    {{% endfor %}}
+     </form>
+{% endblock %}
